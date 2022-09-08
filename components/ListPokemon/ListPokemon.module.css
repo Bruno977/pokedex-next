@@ -1,0 +1,30 @@
+.card {
+  background: var(--light-color);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--medium-border-radius);
+  padding: 1.25rem;
+}
+.img {
+  border-radius: var(--round-border-radius);
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nameID p:first-of-type {
+  font-size: 0.75rem;
+  color: var(--light-text-color);
+  margin-bottom: 0.3rem;
+}
+.nameID p:last-of-type {
+  color: #2f3133;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.imgType {
+  max-width: 30px;
+  max-height: 30px;
+}

@@ -1,0 +1,23 @@
+.button {
+  background: rgba(97, 110, 183, 0.2);
+  color: var(--ghost-color);
+  font-weight: bold;
+  border: 0;
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  border-radius: var(--small-border-radius);
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+.button:hover:enabled {
+  background: var(--ghost-color);
+  color: var(--light-color);
+}
+.button + .button {
+  margin-left: 1.25rem;
+}
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

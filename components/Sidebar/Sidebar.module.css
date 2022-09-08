@@ -1,0 +1,28 @@
+.sidebar ul li + li {
+  margin-top: 1.25rem;
+}
+.sidebar ul li {
+  /* color: var(--light-text-color); */
+  cursor: pointer;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  filter: grayscale(100%);
+  transition: var(--all-transition);
+}
+/* .sidebar ul li.active {
+  filter: grayscale(0);
+  opacity: 1;
+} */
+.sidebar ul li span {
+  padding-left: 0.625rem;
+  text-transform: capitalize;
+}
+.allPokemons,
+.allPokemons span {
+  color: var(--ghost-color);
+}
+.sidebar .typeActive {
+  filter: grayscale(0);
+  opacity: 1;
+}
