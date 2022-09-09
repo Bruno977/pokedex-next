@@ -1,0 +1,8 @@
+.form button {
+  border: 0;
+  background: none;
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  cursor: pointer;
+}

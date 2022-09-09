@@ -1,39 +1,24 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { useAppProvider } from "../../context/AppContext";
 import { usePokemons } from "../../context/PokemonsContext";
 import { api } from "../../services/api";
 import Pagination from "../Pagination";
+import Search from "../Search";
 
 import styles from "./ListPokemon.module.css";
 
 function ListPokemon() {
   const {
     pokemons,
-    setPokemons,
-    currentPage,
     setCurrentPage,
     nextPage,
-    setNextPage,
     prevPage,
-    setPrevPage,
+    hidePagination,
+    countPokemons,
   } = usePokemons();
+  const { loading, setLoading } = useAppProvider();
   const [listPokemons, setListPokemons] = useState([]);
-
-  const [loading, setLoading] = useState(false);
-
-  // async function getPokemons() {
-  //   const response = await api.get(currentPage);
-  //   setNextPage(response.data.next);
-  //   setPrevPage(response.data.previous);
-  //   const pokemonsName = response.data.results.map((pokemon) => {
-  //     return pokemon.name;
-  //   });
-  //   setPokemons(pokemonsName);
-  // }
-
-  // useEffect(() => {
-  //   getPokemons();
-  // }, [currentPage]);
 
   useEffect(() => {
     setLoading(true);
@@ -59,9 +44,9 @@ function ListPokemon() {
   }, [pokemons]);
 
   return (
-    <ul className="columns sm-gap">
+    <ul className={styles.grid}>
       {loading ? (
-        <li className="col-md-12 col-sm-12">
+        <li className="">
           <Image
             src="/images/loading.svg"
             alt="Loading"
@@ -71,13 +56,26 @@ function ListPokemon() {
         </li>
       ) : (
         <>
-          {listPokemons && (
+          {listPokemons.length ? (
             <>
+              <div className={`${styles.countPokemons} columns md-gap`}>
+                {countPokemons && (
+                  <div className={`$ flex ai-c col-md-8 col-sm-12`}>
+                    <Image
+                      src="/images/icon-poke-red.svg"
+                      alt="Pokemons"
+                      width="20"
+                      height="20"
+                    />
+                    <p className="pl-1">{countPokemons} Pokémons</p>
+                  </div>
+                )}
+                <div className="col-md-4 col-sm-12">
+                  <Search />
+                </div>
+              </div>
               {listPokemons.map((pokemon) => (
-                <li
-                  key={pokemon.id}
-                  className={`${styles.card} col-md-4 col-sm-12 `}
-                >
+                <li key={pokemon.id} className={`${styles.card}`}>
                   <div className={`${styles.img} ${pokemon.type}`}>
                     {pokemon.img && (
                       <Image
@@ -109,16 +107,24 @@ function ListPokemon() {
                   </div>
                 </li>
               ))}
-              <div className="col-md-4 col-sm-12 text-center ">
-                <div className="mt-2">
-                  <Pagination
-                    handleClickNext={() => setCurrentPage(nextPage)}
-                    handleClickPrev={() => setCurrentPage(prevPage)}
-                    nextPage={nextPage}
-                    prevPage={prevPage}
-                  />
+            </>
+          ) : (
+            <p>Nenhum pokemon encontrado</p>
+          )}
+          {listPokemons && (
+            <>
+              {!hidePagination && (
+                <div className={`${styles.pagination} text-center`}>
+                  <div className="mt-2">
+                    <Pagination
+                      handleClickNext={() => setCurrentPage(nextPage)}
+                      handleClickPrev={() => setCurrentPage(prevPage)}
+                      nextPage={nextPage}
+                      prevPage={prevPage}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </>
           )}
         </>

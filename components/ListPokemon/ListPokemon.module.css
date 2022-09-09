@@ -1,3 +1,8 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1.25rem;
+}
 .card {
   background: var(--light-color);
   box-shadow: var(--box-shadow);
@@ -27,4 +32,21 @@
 .imgType {
   max-width: 30px;
   max-height: 30px;
+}
+.pagination,
+.countPokemons {
+  grid-column: span 3;
+}
+.countPokemons p {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .pagination,
+  .countPokemons {
+    grid-column: span 1;
+  }
 }

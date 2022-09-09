@@ -10,6 +10,7 @@ export default function Home({ types }) {
           <div className="col-md-3 col-sm-12">
             <Sidebar types={types} />
           </div>
+
           <div className="col-md-9 col-sm-12">
             <main>
               <ListPokemon />
@@ -22,6 +23,7 @@ export default function Home({ types }) {
 }
 export async function getServerSideProps(context) {
   const type = await api.get("/type");
+
   return {
     props: {
       types: type.data.results,

@@ -9,6 +9,10 @@ export function PokemonsProvider({ children }) {
   const [nextPage, setNextPage] = useState();
   const [prevPage, setPrevPage] = useState();
 
+  const [hidePagination, setHidePagination] = useState(false);
+
+  const [countPokemons, setCountPokemons] = useState(false);
+
   return (
     <PokemonsContext.Provider
       value={{
@@ -20,6 +24,10 @@ export function PokemonsProvider({ children }) {
         setNextPage,
         prevPage,
         setPrevPage,
+        hidePagination,
+        setHidePagination,
+        setCountPokemons,
+        countPokemons,
       }}
     >
       {children}

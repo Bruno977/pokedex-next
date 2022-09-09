@@ -5,9 +5,18 @@ import { usePokemons } from "../../context/PokemonsContext";
 import { api } from "../../services/api";
 
 function Sidebar({ types }) {
-  const { setPokemons, currentPage, setNextPage, setPrevPage } = usePokemons();
+  const {
+    setPokemons,
+    currentPage,
+    setNextPage,
+    setPrevPage,
+    setHidePagination,
+    countPokemons,
+    setCountPokemons,
+  } = usePokemons();
   const [active, setActive] = useState(false);
   const ref = useRef([]);
+
   async function handleClick(type, event) {
     if (ref) {
       for (let item of ref.current) {
@@ -16,13 +25,14 @@ function Sidebar({ types }) {
     }
     try {
       const response = await api.get(`type/${type}`);
-
       const pokemonsName = response.data.pokemon.map((pokemon) => {
         return pokemon.pokemon.name;
       });
       setPokemons(pokemonsName);
       setActive(false);
       event.classList.add(styles.typeActive);
+      setHidePagination(true);
+      setCountPokemons(pokemonsName.length);
     } catch (error) {
       console.log(error);
     }
@@ -38,11 +48,13 @@ function Sidebar({ types }) {
       const response = await api.get(currentPage);
       setNextPage(response.data.next);
       setPrevPage(response.data.previous);
+      setCountPokemons(response.data.count);
       const pokemonsName = response.data.results.map((pokemon) => {
         return pokemon.name;
       });
       setPokemons(pokemonsName);
       setActive(true);
+      setHidePagination(false);
     } catch (error) {
       console.log(error);
     }
