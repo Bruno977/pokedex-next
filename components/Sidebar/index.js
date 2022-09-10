@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./Sidebar.module.css";
 import { usePokemons } from "../../context/PokemonsContext";
 import { api } from "../../services/api";
+import { useAppProvider } from "../../context/AppContext";
 
 function Sidebar({ types }) {
   const {
@@ -11,13 +12,15 @@ function Sidebar({ types }) {
     setNextPage,
     setPrevPage,
     setHidePagination,
-    countPokemons,
     setCountPokemons,
   } = usePokemons();
+  const { loading, setLoading } = useAppProvider();
+
   const [active, setActive] = useState(false);
   const ref = useRef([]);
 
   async function handleClick(type, event) {
+    setLoading(true);
     if (ref) {
       for (let item of ref.current) {
         item.classList.remove(styles.typeActive);

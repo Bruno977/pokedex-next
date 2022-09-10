@@ -1,23 +1,15 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { usePokemons } from "../../context/PokemonsContext";
-import { api } from "../../services/api";
 import styles from "./Search.module.css";
 
 function Search() {
-  const [pokemonSearch, setPokemonSearch] = useState([]);
-  const { setPokemons } = usePokemons();
+  const { setPokemons, setHidePagination } = usePokemons();
   const [search, setSearch] = useState("");
 
   async function handleClick() {
-    // setPokemons(search);
-    console.log(search);
-    //   try {
-    //     const reponse = await api.get(`pokemon/${search}`);
-    //     console.log(reponse.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
+    setPokemons([search]);
+    setHidePagination(true);
   }
 
   return (
