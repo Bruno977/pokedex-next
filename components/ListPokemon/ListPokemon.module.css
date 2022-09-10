@@ -8,6 +8,14 @@
   box-shadow: var(--box-shadow);
   border-radius: var(--medium-border-radius);
   padding: 1.25rem;
+  cursor: pointer;
+  transform: translateY(0);
+  transition: var(--transition);
+}
+.card:hover {
+  transform: translateY(-1%);
+
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
 .img {
   border-radius: var(--round-border-radius);
