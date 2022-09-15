@@ -3,12 +3,17 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import styles from "./Modal.module.css";
 
-function Modal({ name }) {
+function Modal({ name, setActiveModal }) {
   const [pokemon, setPokemon] = useState([]);
+  const [abilitie, setAbilitie] = useState(false);
   useEffect(() => {
     async function getPokemon() {
       try {
         const response = await api.get(`/pokemon/${name}`);
+        const responseType = await api.get(
+          `/type/${response.data.types[0].type.name}`
+        );
+
         setPokemon({
           id: response.data.id,
           name: response.data.name,
@@ -18,19 +23,34 @@ function Modal({ name }) {
           height: response.data.height,
           weight: response.data.weight,
           abilities: response.data.abilities,
+          stats: response.data.stats,
+          weaknesses: responseType.data.damage_relations.double_damage_from,
         });
         console.log(response.data);
       } catch (error) {
         console.log(error);
       }
     }
+
     getPokemon();
   }, [name]);
+
   return (
     <>
       {pokemon ? (
         <section className={styles.modal}>
           <div className={styles.modalContent}>
+            <div
+              className={styles.closeModal}
+              onClick={() => setActiveModal(false)}
+            >
+              <Image
+                src="/images/close.svg"
+                alt="Fechar"
+                width="19"
+                height="19"
+              />
+            </div>
             <div className={styles.grid}>
               <div
                 className={`${styles.containerImage}`}
@@ -49,12 +69,14 @@ function Modal({ name }) {
                   </div>
                 )}
                 {pokemon.image && (
-                  <Image
-                    src={pokemon.image}
-                    alt={pokemon.name}
-                    width="190"
-                    height="190"
-                  />
+                  <div className={styles.imgPokemon}>
+                    <Image
+                      src={pokemon.image}
+                      alt={pokemon.name}
+                      width="190"
+                      height="190"
+                    />
+                  </div>
                 )}
               </div>
 
@@ -77,20 +99,31 @@ function Modal({ name }) {
                 <ul className={`${styles.attributes} flex ai-c jc-sb`}>
                   {pokemon.height && (
                     <li>
-                      <p>Height</p>
-                      <p>{pokemon.height}m</p>
+                      <p>Altura</p>
+                      <p className="mt-1">{pokemon.height}m</p>
                     </li>
                   )}
                   {pokemon.weight && (
                     <li>
-                      <p>Weight</p>
-                      <p>{pokemon.weight}kg</p>
+                      <p>Peso</p>
+                      <p className="mt-1">{pokemon.weight}kg</p>
                     </li>
                   )}
                   {pokemon?.abilities && (
-                    <li>
-                      <p>Abilities</p>
-                      <ul className={`${styles.abilities}`}>
+                    <li className="relative">
+                      <p className={styles.titleAbilitie}>Habilidades</p>
+                      <button
+                        type="button"
+                        onClick={() => setAbilitie(!abilitie)}
+                        className={`${pokemon.type} ${pokemon.type}-color ${styles.abilitiesButton}`}
+                      >
+                        Ver todos
+                      </button>
+                      <ul
+                        className={`${styles.abilities} ${
+                          abilitie ? styles.active : ""
+                        }`}
+                      >
                         {pokemon?.abilities.map((abilitie) => (
                           <li
                             key={abilitie?.ability.name}
@@ -103,6 +136,43 @@ function Modal({ name }) {
                     </li>
                   )}
                 </ul>
+                {pokemon?.weaknesses && (
+                  <>
+                    <p className="text-natural mv-2 ">Fraquezas</p>
+                    <ul className={`${styles.weaknesses} mv-2 flex ai-gc fw-w`}>
+                      {pokemon?.weaknesses.map((type) => (
+                        <li
+                          className={`${type.name} ${type.name}-color`}
+                          key={type.name}
+                        >
+                          {type.name}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                {pokemon?.stats && (
+                  <ul className={`${styles.stats} `}>
+                    <p className="text-natural mb-2">Status</p>
+
+                    {pokemon?.stats.map((stat) => (
+                      <li className="flex ai-c jc-sb" key={stat.stat.name}>
+                        <p className={`${styles.statsName} mr-2`}>
+                          {stat.stat.name}
+                        </p>
+                        <span className={styles.progressBar}>
+                          <span
+                            className={`${styles.progressBarWidth}`}
+                            style={{
+                              width: `${stat.base_stat}%`,
+                              background: `var(--${pokemon?.type}-color)`,
+                            }}
+                          ></span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>

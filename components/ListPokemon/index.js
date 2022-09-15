@@ -144,7 +144,9 @@ function ListPokemon() {
           </>
         )}
       </ul>
-      {activeModal && <Modal name={pokemonModal} />}
+      {activeModal && (
+        <Modal name={pokemonModal} setActiveModal={setActiveModal} />
+      )}
     </>
   );
 }
