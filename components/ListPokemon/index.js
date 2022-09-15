@@ -22,7 +22,7 @@ function ListPokemon() {
   const [listPokemons, setListPokemons] = useState([]);
 
   const [activeModal, setActiveModal] = useState(false);
-  const [pokemonModal, setPokemonModal] = useState([]);
+  const [pokemonModal, setPokemonModal] = useState("");
 
   function handleClickShowPokemon(pokemon) {
     setPokemonModal(pokemon);
@@ -144,7 +144,7 @@ function ListPokemon() {
           </>
         )}
       </ul>
-      {activeModal && <Modal pokemon={pokemonModal} />}
+      {activeModal && <Modal name={pokemonModal} />}
     </>
   );
 }
