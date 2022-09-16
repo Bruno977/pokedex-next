@@ -10,11 +10,13 @@
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
 }
+
 .modalContent {
   background-color: var(--light-color);
   width: 52rem;
   border-radius: var(--medium-border-radius);
   position: relative;
+
   /* height: 500px; */
 }
 .closeModal {
@@ -170,5 +172,14 @@
 @media screen and (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
   }
 }

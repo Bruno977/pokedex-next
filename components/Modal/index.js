@@ -1,11 +1,24 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { api } from "../../services/api";
+import { Transition } from "react-transition-group";
 import styles from "./Modal.module.css";
 
-function Modal({ name, setActiveModal }) {
+function Modal({ name, setActiveModal, activeModal }) {
   const [pokemon, setPokemon] = useState([]);
   const [abilitie, setAbilitie] = useState(false);
+
+  const duration = 5000;
+  const defaultStyle = {
+    transition: `opacity ${duration}ms ease-in-out`,
+    opacity: 0,
+  };
+  const transitionStyles = {
+    entering: { opacity: 1 },
+    entered: { opacity: 1 },
+    exiting: { opacity: 0 },
+    exited: { opacity: 0 },
+  };
   useEffect(() => {
     async function getPokemon() {
       try {
@@ -38,7 +51,9 @@ function Modal({ name, setActiveModal }) {
   return (
     <>
       {pokemon ? (
-        <section className={styles.modal}>
+        <section
+          className={`${styles.modal} ${activeModal ? styles.active : ""} `}
+        >
           <div className={styles.modalContent}>
             <div
               className={styles.closeModal}
@@ -180,6 +195,7 @@ function Modal({ name, setActiveModal }) {
       ) : (
         <p>Loading</p>
       )}
+      ;
     </>
   );
 }
