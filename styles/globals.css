@@ -3055,3 +3055,16 @@ hr.no-margin {
 .normal-color {
   color: var(--normal-color);
 }
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}

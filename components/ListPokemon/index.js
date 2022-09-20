@@ -21,12 +21,14 @@ function ListPokemon() {
   const { loading, setLoading } = useAppProvider();
   const [listPokemons, setListPokemons] = useState([]);
 
-  const [activeModal, setActiveModal] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  // const [activeModal, setActiveModal] = useState(false);
   const [pokemonModal, setPokemonModal] = useState("");
 
   function handleClickShowPokemon(pokemon) {
     setPokemonModal(pokemon);
-    setActiveModal(true);
+    setIsOpen(true);
   }
 
   useEffect(() => {
@@ -144,13 +146,13 @@ function ListPokemon() {
           </>
         )}
       </ul>
-      {activeModal && (
-        <Modal
-          name={pokemonModal}
-          setActiveModal={setActiveModal}
-          activeModal={activeModal}
-        />
-      )}
+      {/* {activeModal && ( */}
+      <Modal
+        name={pokemonModal}
+        setIsOpen={setIsOpen}
+        modalIsOpen={modalIsOpen}
+      />
+      {/* )} */}
     </>
   );
 }

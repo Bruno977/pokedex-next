@@ -1,24 +1,25 @@
-.modal {
+.reactModalOverlay {
+  background: rgba(0, 0, 0, 0.5);
+
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
+  bottom: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
 }
 
-.modalContent {
-  background-color: var(--light-color);
-  width: 52rem;
-  border-radius: var(--medium-border-radius);
+.reactModalContent {
+  width: 100%;
+  max-width: 52rem;
+  background: var(--light-color);
   position: relative;
-
-  /* height: 500px; */
+  border-radius: var(--medium-border-radius);
 }
+
 .closeModal {
   position: absolute;
   top: -50px;
