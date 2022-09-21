@@ -1,6 +1,8 @@
 ## Pokedex 
 
-Layout inspirado em [https://codeboost.com.br/projetos/pokeapi/](https://codeboost.com.br/projetos/pokeapi/).
+Layout inspirado em: [https://codeboost.com.br/projetos/pokeapi/](https://codeboost.com.br/projetos/pokeapi/)
+
+Link Projeto: [pokedex-next-plum.vercel.app](pokedex-next-plum.vercel.app)
 
 **Desktop**
 
