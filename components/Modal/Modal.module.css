@@ -18,6 +18,7 @@
   background: var(--light-color);
   position: relative;
   border-radius: var(--medium-border-radius);
+  outline: 0;
 }
 
 .closeModal {
@@ -79,6 +80,7 @@
 
 .contentPokemon {
   padding: 2rem 4rem 2rem 4rem;
+  overflow: auto;
 }
 .types li {
   padding: 0.3rem 1rem;
@@ -145,8 +147,9 @@
   padding: 0.3rem 1rem;
   border-radius: var(--small-border-radius);
 }
-.weaknesses li + li {
-  margin-left: 0.625rem;
+.weaknesses li {
+  margin-right: 0.625rem;
+  margin-top: 0.625rem;
 }
 .stats li + li {
   margin-top: 0.625rem;
@@ -173,6 +176,24 @@
 @media screen and (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+  .reactModalContent {
+    max-width: calc(100% - 20px);
+  }
+  .imgPokemon {
+    margin-right: 0;
+  }
+  .closeModal {
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 99;
+    border-radius: var(--round-border-radius);
+  }
+  .containerImage {
+    border-radius: var(--medium-border-radius) var(--medium-border-radius) 0 0;
+  }
+  .progressBar {
+    max-width: 180px;
   }
 }
 

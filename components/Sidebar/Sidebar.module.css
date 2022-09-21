@@ -26,3 +26,48 @@
   filter: grayscale(0);
   opacity: 1;
 }
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background: var(--light-color);
+    overflow: auto;
+
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: var(--transition);
+  }
+  .sidebar ul {
+    overflow: auto;
+    width: 100%;
+    padding: 2.5rem;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    flex-direction: column;
+  }
+  .sidebar.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .closeMenu {
+    position: sticky;
+    top: 1.25rem;
+    right: 1.25rem;
+    margin-right: 1.25rem;
+    cursor: pointer;
+    text-align: right;
+  }
+  .sidebar ul li span {
+    font-size: 1.5rem;
+  }
+}

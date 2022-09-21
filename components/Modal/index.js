@@ -140,8 +140,10 @@ function Modal({ name, setIsOpen, modalIsOpen }) {
               </ul>
               {pokemon?.weaknesses && (
                 <>
-                  <p className="text-natural mv-2 ">Fraquezas</p>
-                  <ul className={`${styles.weaknesses} mv-2 flex ai-gc fw-w`}>
+                  <p className="text-natural mt-2 mb-1 ">Fraquezas</p>
+                  <ul
+                    className={`${styles.weaknesses} mt-1 mb-2 flex ai-gc fw-w`}
+                  >
                     {pokemon?.weaknesses.map((type) => (
                       <li
                         className={`${type.name} ${type.name}-color`}

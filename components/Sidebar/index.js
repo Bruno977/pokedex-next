@@ -5,7 +5,7 @@ import { usePokemons } from "../../context/PokemonsContext";
 import { api } from "../../services/api";
 import { useAppProvider } from "../../context/AppContext";
 
-function Sidebar({ types }) {
+function Sidebar({ types, setOpenMenu, openMenu }) {
   const {
     setPokemons,
     currentPage,
@@ -14,12 +14,16 @@ function Sidebar({ types }) {
     setHidePagination,
     setCountPokemons,
   } = usePokemons();
-  const { loading, setLoading } = useAppProvider();
+
+  const { setLoading } = useAppProvider();
 
   const [active, setActive] = useState(false);
+
   const ref = useRef([]);
 
   async function handleClick(type, event) {
+    setOpenMenu(false);
+
     setLoading(true);
     if (ref) {
       for (let item of ref.current) {
@@ -42,6 +46,7 @@ function Sidebar({ types }) {
   }
 
   async function getPokemons() {
+    setOpenMenu(false);
     if (ref) {
       for (let item of ref.current) {
         item.classList.remove(styles.typeActive);
@@ -68,7 +73,17 @@ function Sidebar({ types }) {
   }, [currentPage]);
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar}  ${openMenu ? styles.active : ""}`}>
+      <div className={`${styles.closeMenu} hide-desktop`}>
+        <Image
+          src="/images/close.svg"
+          alt="Fechar menu"
+          width="24"
+          height="24"
+          className={styles.close}
+          onClick={() => setOpenMenu(false)}
+        />
+      </div>
       {types ? (
         <ul>
           <li
