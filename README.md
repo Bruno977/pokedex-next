@@ -2,8 +2,6 @@
 
 Layout inspirado em: [https://codeboost.com.br/projetos/pokeapi/](https://codeboost.com.br/projetos/pokeapi/)
 
-Link Projeto: [pokedex-next-plum.vercel.app](pokedex-next-plum.vercel.app)
-
 **Desktop**
 
 ![image](https://user-images.githubusercontent.com/47644815/191391047-747e5264-1824-4e3c-8559-590a91667f06.png)
